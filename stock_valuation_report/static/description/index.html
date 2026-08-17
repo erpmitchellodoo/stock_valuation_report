@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Stock Valuation Report | Odoo 19</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            color: #252525;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            line-height: 1.55;
+        }
+
+        .svr-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+        .svr-hero {
+            text-align: center;
+            margin-bottom: 34px;
+        }
+
+        .svr-hero img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 1280px;
+            margin: 0 auto 24px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #5b2a86;
+            font-size: 34px;
+            margin: 8px 0 8px;
+            font-weight: 700;
+        }
+
+        h2 {
+            color: #5b2a86;
+            font-size: 25px;
+            margin: 42px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee4f5;
+        }
+
+        h3 {
+            color: #3c3c3c;
+            font-size: 18px;
+            margin: 0 0 7px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 8px 0 14px;
+        }
+
+        .svr-lead {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .svr-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 22px 0;
+        }
+
+        .svr-card {
+            background: #faf8fc;
+            border: 1px solid #eadff1;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .svr-card strong {
+            color: #5b2a86;
+        }
+
+        .svr-flow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 12px;
+            margin: 22px 0;
+        }
+
+        .svr-step {
+            flex: 1 1 160px;
+            max-width: 210px;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #e6dbea;
+            border-radius: 12px;
+            padding: 18px 14px;
+            box-shadow: 0 2px 8px rgba(60, 30, 80, 0.06);
+        }
+
+        .svr-step .num {
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background: #5b2a86;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .svr-arrow {
+            align-self: center;
+            color: #5b2a86;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        ul {
+            padding-left: 22px;
+            margin-top: 8px;
+        }
+
+        li {
+            margin: 7px 0;
+            font-size: 16px;
+        }
+
+        .svr-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+            font-size: 15px;
+        }
+
+        .svr-table th {
+            background: #5b2a86;
+            color: #fff;
+            text-align: left;
+            padding: 11px;
+        }
+
+        .svr-table td {
+            border: 1px solid #e5e5e5;
+            padding: 10px 11px;
+        }
+
+        .svr-table tr:nth-child(even) td {
+            background: #fafafa;
+        }
+
+        .svr-note {
+            background: #f7f1fa;
+            border-left: 4px solid #5b2a86;
+            padding: 15px 18px;
+            margin: 18px 0;
+            border-radius: 6px;
+        }
+
+        .svr-footer {
+            margin-top: 42px;
+            padding: 20px;
+            text-align: center;
+            background: #5b2a86;
+            color: #fff;
+            border-radius: 12px;
+        }
+
+        .svr-footer strong {
+            font-size: 18px;
+        }
+
+        @media (max-width: 800px) {
+            .svr-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .svr-arrow {
+                display: none;
+            }
+
+            .svr-wrap {
+                padding: 14px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="svr-wrap">
+
+    <div class="svr-hero">
+        <img src="banner.png" alt="Stock Valuation Report for Odoo 19"/>
+        <h1>Stock Valuation Report for Odoo 19</h1>
+        <p class="svr-lead">
+            A detailed inventory valuation view for analyzing incoming and outgoing inventory
+            transactions with moved quantity, unit value, total value, product and transaction reference.
+        </p>
+    </div>
+
+    <h2>Overview</h2>
+    <p>
+        <strong>Stock Valuation Report</strong> provides a clear list-based view of inventory valuation
+        transactions in Odoo 19. It is designed to reconstruct the practical valuation-analysis experience
+        of the Odoo 18 view in an Odoo 19-compatible interface.
+    </p>
+    <p>
+        Review inventory movements together with their valuation information and quickly analyze
+        the financial value associated with stock transactions.
+    </p>
+
+    <div class="svr-grid">
+        <div class="svr-card">
+            <h3>Incoming &amp; Outgoing</h3>
+            <p>Review valuation information for inventory transactions moving into or out of stock.</p>
+        </div>
+        <div class="svr-card">
+            <h3>Transaction-Level Detail</h3>
+            <p>See the transaction reference, product, transaction date, moved quantity, unit cost and total value.</p>
+        </div>
+        <div class="svr-card">
+            <h3>Odoo 19 List View</h3>
+            <p>Use a familiar Odoo list view with filtering, grouping and standard export capabilities.</p>
+        </div>
+    </div>
+
+    <h2>Workflow</h2>
+    <div class="svr-flow">
+        <div class="svr-step">
+            <div class="num">1</div>
+            <h3>Inventory Transaction</h3>
+            <p>Inventory movement is recorded in Odoo.</p>
+        </div>
+        <div class="svr-arrow">→</div>
+        <div class="svr-step">
+            <div class="num">2</div>
+            <h3>Valuation Data</h3>
+            <p>Valuation information is associated with the transaction.</p>
+        </div>
+        <div class="svr-arrow">→</div>
+        <div class="svr-step">
+            <div class="num">3</div>
+            <h3>Report View</h3>
+            <p>Transactions are presented in a dedicated valuation list.</p>
+        </div>
+        <div class="svr-arrow">→</div>
+        <div class="svr-step">
+            <div class="num">4</div>
+            <h3>Filter &amp; Group</h3>
+            <p>Use Odoo filters and group-by options to analyze the data.</p>
+        </div>
+        <div class="svr-arrow">→</div>
+        <div class="svr-step">
+            <div class="num">5</div>
+            <h3>Export</h3>
+            <p>Export the list using Odoo's standard export option.</p>
+        </div>
+    </div>
+
+    <h2>Valuation List Fields</h2>
+    <table class="svr-table">
+        <thead>
+        <tr>
+            <th>Field</th>
+            <th>Purpose</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Transaction Reference</td>
+            <td>Identifies the inventory transaction or related stock reference.</td>
+        </tr>
+        <tr>
+            <td>Product</td>
+            <td>Shows the product associated with the valuation transaction.</td>
+        </tr>
+        <tr>
+            <td>Transaction Date</td>
+            <td>Shows when the inventory transaction occurred.</td>
+        </tr>
+        <tr>
+            <td>Moved Quantity</td>
+            <td>Shows the quantity moved by the transaction.</td>
+        </tr>
+        <tr>
+            <td>Unit Cost / Unit Value</td>
+            <td>Shows the value assigned per unit.</td>
+        </tr>
+        <tr>
+            <td>Total Value</td>
+            <td>Shows the total valuation amount for the transaction.</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Key Features</h2>
+    <div class="svr-grid">
+        <div class="svr-card">
+            <h3>Detailed Valuation View</h3>
+            <ul>
+                <li>Transaction-level inventory valuation.</li>
+                <li>Incoming and outgoing stock visibility.</li>
+                <li>Unit value and total value in one view.</li>
+            </ul>
+        </div>
+        <div class="svr-card">
+            <h3>Powerful Odoo List Tools</h3>
+            <ul>
+                <li>Standard Odoo list view.</li>
+                <li>Filter records by available fields.</li>
+                <li>Group records using Odoo group-by options.</li>
+            </ul>
+        </div>
+        <div class="svr-card">
+            <h3>Export &amp; Analysis</h3>
+            <ul>
+                <li>Use Odoo's standard export functionality.</li>
+                <li>Prepare filtered or grouped data for further analysis.</li>
+                <li>Easy-to-read valuation information.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>Typical Use Cases</h2>
+    <ul>
+        <li>Review the value of incoming inventory transactions.</li>
+        <li>Review the value of outgoing inventory transactions.</li>
+        <li>Compare moved quantities with unit and total values.</li>
+        <li>Find valuation transactions for a particular product.</li>
+        <li>Analyze transactions by date or other available fields.</li>
+        <li>Filter and group valuation records before exporting them.</li>
+    </ul>
+
+    <h2>Odoo 18 View Reconstruction for Odoo 19</h2>
+    <div class="svr-note">
+        This module brings the valuation-analysis view concept into an Odoo 19 interface,
+        with a dedicated list presentation focused on transaction reference, product,
+        date, quantity, unit value and total value.
+    </div>
+
+
+    <h2>Where to Find the Report</h2>
+    <div class="svr-note">
+        <strong>Report menu path:</strong>
+        Inventory &nbsp;›&nbsp; Reporting &nbsp;›&nbsp; Valuation History
+    </div>
+    <p>
+        Open <strong>Inventory</strong>, go to <strong>Reporting</strong>, and select
+        <strong>Valuation History</strong> to access the stock valuation transaction report.
+    </p>
+
+    <h2>Compatibility</h2>
+    <table class="svr-table">
+        <tbody>
+        <tr>
+            <td><strong>Odoo Version</strong></td>
+            <td>Odoo 19</td>
+        </tr>
+        <tr>
+            <td><strong>Interface</strong></td>
+            <td>Odoo standard list view</td>
+        </tr>
+        <tr>
+            <td><strong>Analysis</strong></td>
+            <td>Filters and Group By</td>
+        </tr>
+        <tr>
+            <td><strong>Export</strong></td>
+            <td>Odoo standard export option</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="svr-footer">
+        <strong>Stock Valuation Report — Odoo 19</strong><br/>
+        Detailed inventory valuation information in a practical Odoo list view.
+        <br/><strong>Support<br/>
+        erpmitchellodoo@gmail.com</strong>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="stock_avco_report_view_serach_report">
+        <field name="name">stock.avco.report.view.list</field>
+        <field name="model">stock.avco.report</field>
+        <field name="arch" type="xml">
+            <search string="Valuation">
+                <field name="product_id"/>
+                <field name="categ_id"/>
+                <field name="reference"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <separator/>
+                <separator/>
+                <filter string="Date" name="date" date="date"/>
+                <group>
+                    <filter string="Reference" name="group_by_reference"
+                            context="{'group_by': 'reference'}"/>
+                    <filter string="Product" name="group_by_product"
+                            context="{'group_by': 'product_id'}"/>
+                    <filter string="Product Category" name="group_by_product_category"
+                            context="{'group_by': 'categ_id'}"/>
+                    <filter string="Company" name="group_by_company"
+                            context="{'group_by': 'company_id'}" groups="base.group_multi_company"/>
+                    <filter string="Date" name="group_by_date"
+                            context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="stock_avco_report_view_list_report" model="ir.ui.view">
+        <field name="name">stock.avco.report.view.list</field>
+        <field name="model">stock.avco.report</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="company_id" optional="hide"/>
+                <field name="reference"/>
+                <field name="product_id"/>
+                <field name="categ_id" optional="show"/>
+                <field name="date"/>
+                <field name="description"/>
+                <field name="quantity" column_invisible="context.get('cost_method') == 'standard'"/>
+                <field name="added_value" widget="monetary" options="{'currency_field': 'currency_id'}"
+                       column_invisible="context.get('cost_method') == 'standard'" sum="Total"/>
+                <field name="value" string="Unit Cost" widget="monetary" options="{'currency_field': 'currency_id'}"
+                       column_invisible="context.get('cost_method') != 'standard'"/>
+                <field name="total_value" widget="monetary" options="{'currency_field': 'currency_id'}"
+                       column_invisible="context.get('cost_method') == 'standard'" />
+                <field name="total_quantity" column_invisible="context.get('cost_method') == 'standard'"/>
+                <field name="avco_value" string="Unit Cost" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"
+                       column_invisible="context.get('cost_method') == 'standard'"/>
+                <field name="justification" column_invisible="context.get('cost_method') != 'average'" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="stock_avco_report_action_report" model="ir.actions.act_window">
+        <field name="name">Valuation History</field>
+        <field name="res_model">stock.avco.report</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'search_default_group_by_product': 1}</field>
+        <field name="domain">[('product_id.is_storable', '=', True), ('product_id.is_kits','=', False)]</field>
+        <field name="view_id" ref="stock_avco_report_view_list_report"/>
+        <field name="search_view_id" ref="stock_avco_report_view_serach_report"/>
+
+
+    </record>
+    <menuitem id="menu_stock_valuation_report_history"
+              name="Valuation History"
+              parent="stock.menu_warehouse_report"
+              action="stock_avco_report_action_report"
+              sequence="160"
+              groups="stock.group_stock_manager"/>
+</odoo>
